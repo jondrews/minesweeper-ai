@@ -1,12 +1,12 @@
-# minesweeper-ai
-An implementation of the classic minesweeper game, with an AI agent
+# 💥 minesweeper-ai
+**An implementation of the classic minesweeper game, with an AI agent**
 
 ![Screenshot of minesweeper-ai](./minesweeper-screenshot.jpg)
 
-I completed this project as part CS50AI, Havard University's course in Artificial Intelligence in Python. Project requirements and key deliverables may be viewed [here](https://cs50.harvard.edu/ai/2020/projects/1/minesweeper/).
+I completed this project as part of [CS50AI](https://cs50.harvard.edu/ai/2020/), Harvard University's course in Artificial Intelligence in Python. Project requirements and key deliverables may be viewed [here](https://cs50.harvard.edu/ai/2020/projects/1/minesweeper/).
 I implemented the AI logic in `minesweeper.py`, while the file `runner.py` was created by CS50AI staff and provided as part of the project brief. I have made one minor modification to the staff's code in `runner.py`, as commented at the head of the file.
 
-Game moves may be played by a human, or an AI agent may be invoked to make a move. My implementation of the AI agent uses propositional logic to analyse the agent's knowledge of any revealed game cells, and infer the state of un-revealed cells when possible.
+Game moves may be played either by a human or an AI agent. My implementation of the AI agent uses propositional logic to analyse the agent's knowledge acquired from all revealed game cells, and infer the state of un-revealed cells when possible.
 
 ### To run:
 ```bash
@@ -16,7 +16,7 @@ user@user:~$python runner.py
 
 
 #### Note to CS50AI students & staff:
-My implementation of this project is available here temporarily and solely for the purposes of demonstrating my abilities to potential employers, as permitted by the course's guidelines. Viewing of this material by currently enrolled CS50AI students may constitute a violation of the course's academic integrity policy.
+My implementation of this project is available here temporarily and solely for the purposes of demonstrating my abilities to potential employers. Viewing of this material by currently enrolled CS50AI students may constitute a violation of the course's [academic honesty policy](https://cs50.harvard.edu/ai/2020/honesty/).
 
 
 #### To run in WSL2 on Win10:
