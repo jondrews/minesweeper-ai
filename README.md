@@ -28,6 +28,6 @@ user@user:~$export DISPLAY=$(grep nameserver /etc/resolv.conf | awk '{print $2}'
 ```
 
 In runner.py, it might be necessary to add the following line to suppress audio errors:
-```bash
-user@user:~$os.environ["SDL_AUDIODRIVER"]="dsp"
+```python
+os.environ["SDL_AUDIODRIVER"]="dsp"
 ```
