@@ -122,12 +122,6 @@ class Sentence():
         """
         Updates internal knowledge representation given the fact that
         a cell is known to be a mine.
-        The mark_mine function should first check to see if cell is one 
-        of the cells included in the sentence.
-        If cell is in the sentence, the function should update the sentence 
-        so that cell is no longer in the sentence, but still represents a 
-        logically correct sentence given that cell is known to be a mine.
-        If cell is not in the sentence, then no action is necessary.
         """
         try:
             # remove cell from set and decrease count of sentence by 1
@@ -141,12 +135,6 @@ class Sentence():
         """
         Updates internal knowledge representation given the fact that
         a cell is known to be safe.
-        The mark_safe function should first check to see if cell is 
-        one of the cells included in the sentence.
-        If cell is in the sentence, the function should update the sentence 
-        so that cell is no longer in the sentence, but still represents a 
-        logically correct sentence given that cell is known to be safe.
-        If cell is not in the sentence, then no action is necessary.
         """
         try:
             # remove cell from set. count of sentence is unchanged.
@@ -162,7 +150,6 @@ class MinesweeperAI():
     """
 
     def __init__(self, height=8, width=8):
-
         # Set initial height and width
         self.height = height
         self.width = width
@@ -183,9 +170,10 @@ class MinesweeperAI():
         to mark that cell as a mine as well.
         """
         self.mines.add(cell)
+        # remove this cell from all sentences, and reduce the 
+        # affected sentences' counts by 1
         for sentence in self.knowledge:
-            sentence.mark_mine(cell)  # removes this cell from the sentence
-                                      # and reduces the count by 1
+            sentence.mark_mine(cell) 
 
     def mark_safe(self, cell):
         """
@@ -193,25 +181,15 @@ class MinesweeperAI():
         to mark that cell as safe as well.
         """
         self.safes.add(cell)
+        # remove this cell from all sentences (sentence counts are unchanged)
         for sentence in self.knowledge:
-            sentence.mark_safe(cell)  # removes this cell from the sentence
+            sentence.mark_safe(cell) 
 
     def add_knowledge(self, cell, count):
         """
         Called when the Minesweeper board tells us, for a given
         safe cell, how many neighboring cells have mines in them.
-
-        This function should:
-            1) mark the cell as a move that has been made
-            2) mark the cell as safe
-            3) add a new sentence to the AI's knowledge base
-               based on the value of `cell` and `count`
-            4) mark any additional cells as safe or as mines
-               if it can be concluded based on the AI's knowledge base
-            5) add any new sentences to the AI's knowledge base
-               if they can be inferred from existing knowledge
         """
-
         self.moves_made.add(cell)
         self.mark_safe(cell)
 
@@ -252,7 +230,7 @@ class MinesweeperAI():
                         continue
                     else:
                         for sentence in self.knowledge:
-                            # determine if fact is a subset of this sentence
+                            # if fact is a subset of this sentence
                             if fact.cells <= sentence.cells:
                                 # recalculate the logic of the sentence
                                 sentence.cells -= fact.cells
@@ -289,9 +267,6 @@ class MinesweeperAI():
         Returns a safe cell to choose on the Minesweeper board.
         The move must be known to be safe, and not already a move
         that has been made.
-
-        This function may use the knowledge in self.mines, self.safes
-        and self.moves_made, but should not modify any of those values.
         """
         safe_moves = self.safes - self.moves_made
         if len(safe_moves) > 0:

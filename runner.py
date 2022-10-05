@@ -6,7 +6,10 @@ import time
 from minesweeper import Minesweeper, MinesweeperAI
 
 """
-
+NOTE: This file was written by CS50AI staff. I implemented the AI logic in the
+file minesweeper.py, as per the CS50AI course deliverables.
+I did, however, slightly modify this file in lines 199 & 205 to show the AI
+agent's flags visually on the game board.
 """
 
 # Added this line to fix config issues on WSL. 
@@ -193,12 +196,13 @@ while True:
             if move is None:
                 move = ai.make_random_move()
                 if move is None:
-                    flags = ai.mines.copy()
+                    # flags = ai.mines.copy()  # Jon removed
                     print("No moves left to make.")
                 else:
                     print("No known safe moves, AI making random move.")
             else:
                 print("AI making safe move.")
+            flags = ai.mines.copy() # Jon added - draw flags when the AI moves
             time.sleep(0.2)
 
         # Reset game state
@@ -223,20 +227,11 @@ while True:
     if move:
         if game.is_mine(move):
             print()
-            print("########## Ker-booom! Mine hit, game lost 💥 ########")
+            print("Ker-booom! 💥 Mine hit, game lost.")
             lost = True
         else:
             nearby = game.nearby_mines(move)
             revealed.add(move)
             ai.add_knowledge(move, nearby)
-
-    # JON ADDED THIS, TO DISPLAY THE AI's FLAGS
-    """
-    if not lost:
-        for mine in ai.mines:
-            flags.add(mine)
-    else:
-        flags = set()
-    """
 
     pygame.display.flip()
